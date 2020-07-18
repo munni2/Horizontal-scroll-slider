@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/plugins/animation.gsap.js"></script>
+</head>
+<body>
+    <style>
+        .scroll-slider {
+            position: relative;
+            overflow: hidden;
+            display: block;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .scroll-wrapper {
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100%;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: pan-y;
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .scroll-slide {
+            flex: 1 0 100vw;
+            max-width: 100vw;
+            height: 100%;
+        }
+
+        .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .item-container {
+            position: relative;
+        }
+        .item-title {
+            font-size: 4vw;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .item-body {
+            @media (min-width:40em) {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            width: 50%;
+            transform: translate(-25%, -50%);
+            }
+        }
+
+        .tag {
+            margin-right: .5rem;
+        }
+        .tag > a {
+            display: block;
+            padding: .25rem .5rem;
+            font-size: .75rem;
+            text-transform: uppercase;
+            background: rgba(#FFFFFF, .25);
+            color: #FFF;
+        }
+        .item:nth-child(1) {
+            background: url("https://images.unsplash.com/photo-1508433957232-3107f5fd5995?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33a01492098edf3e26f986c0ef1a1ff3&auto=format&fit=crop&w=1964&q=80");
+        }
+        .item:nth-child(2) {
+            background: url("https://images.unsplash.com/photo-1508433957232-3107f5fd5995?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33a01492098edf3e26f986c0ef1a1ff3&auto=format&fit=crop&w=1964&q=80");
+        }
+        .item:nth-child(3) {
+            background: url("https://images.unsplash.com/photo-1510154328089-bdd27fc4ff66?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a8096fff6bf58a9b503f2d01cede364c&auto=format&fit=crop&w=1936&q=80");
+        }
+        .item:nth-child(4) {
+            background: url("https://images.unsplash.com/photo-1508433957232-3107f5fd5995?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33a01492098edf3e26f986c0ef1a1ff3&auto=format&fit=crop&w=1964&q=80");
+        }
+    </style>
+    <header>
+        <div class="headings text-center py-5">
+          <h1>Horizontal Scroll</h1>
+          <p class="text-muted">with GSAP, scrollMagic and nice <a href="https://www.unsplash.com" target="_blank">Unsplash.com</a> pictures</p>
+        </div> 
+    </header>
+    <section class="section-items bg-dark text-white">
+        <div class="scroll-slider">
+            <div class="scroll-wrapper">
+                <article class="item scroll-slide">
+                    <div class="scroll-line"></div>
+                    <div class="item-container">
+                        <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1510154328089-bdd27fc4ff66?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a8096fff6bf58a9b503f2d01cede364c&auto=format&fit=crop&w=1936&q=80" width="700px" alt="Image">
+                        </div>
+                        <div class="item-body">
+                        <h2 class="item-title">Grand Hotel</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem error mollitia provident.</p>
+                        <ul class="nav tags">
+                            <li class="nav-item tag"><a href="#" class="nav-link">Hotel</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Colorful</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Symetric</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="item scroll-slide">
+                    <div class="item-container">
+                        <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1508433957232-3107f5fd5995?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33a01492098edf3e26f986c0ef1a1ff3&auto=format&fit=crop&w=1964&q=80" width="700px" alt="Image">
+                        </div>
+                        <div class="item-body">
+                        <h2 class="item-title">Wall Street</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem error mollitia provident.</p>
+                        <ul class="nav tags">
+                            <li class="nav-item tag"><a href="#" class="nav-link">Trader</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Drugs</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Finance</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="item scroll-slide">
+                    <div class="scroll-line"></div>
+                    <div class="item-container">
+                        <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1510154328089-bdd27fc4ff66?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a8096fff6bf58a9b503f2d01cede364c&auto=format&fit=crop&w=1936&q=80" width="700px" alt="Image">
+                        </div>
+                        <div class="item-body">
+                        <h2 class="item-title">Grand Hotel</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem error mollitia provident.</p>
+                        <ul class="nav tags">
+                            <li class="nav-item tag"><a href="#" class="nav-link">Hotel</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Colorful</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Symetric</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="item scroll-slide">
+                    <div class="item-container">
+                        <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1508433957232-3107f5fd5995?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33a01492098edf3e26f986c0ef1a1ff3&auto=format&fit=crop&w=1964&q=80" width="700px" alt="Image">
+                        </div>
+                        <div class="item-body">
+                        <h2 class="item-title">Wall Street</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem error mollitia provident.</p>
+                        <ul class="nav tags">
+                            <li class="nav-item tag"><a href="#" class="nav-link">Trader</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Drugs</a></li>
+                            <li class="nav-item tag"><a href="#" class="nav-link">Finance</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="headings text-center py-5">
+          <h1>Horizontal Scroll</h1>
+          <p class="text-muted">with GSAP, scrollMagic and nice <a href="https://www.unsplash.com" target="_blank">Unsplash.com</a> pictures</p>
+        </div> 
+    </footer>
+
+<script>
+     
+!(function($) {
+
+
+
+var $slider = $('.scroll-slider'),
+    $slides = $('.scroll-slide'),
+    $sliderWrapper = $('.scroll-wrapper'),
+    $firstSlide = $slides.first();
+
+var settings = {},
+    resizing = false,
+    scrollController = null,
+    scrollTween = null,
+    scrollTimeline = null,
+    progress = 0,
+    scrollScene = null;
+
+function scrollSlider(options) {
+
+    // Default
+    settings = $.extend({
+        slider: '.scroll-slider',
+        sliderWrapper: '.scroll-wrapper',
+        slides: '.scroll-slide',
+        slideWidth: null,
+        slideHeight: null,
+    }, options);
+
+    // Set dimensions
+    setDimensions();
+    
+    // On resize        
+    $(window).on( 'resize', function() {
+      clearTimeout(resizing);
+      resizing = setTimeout(function() {
+        setDimensions();
+      }, 250); 
+    });
+  
+}
+
+function setDimensions() {
+
+    settings.slideWidth = $firstSlide.width();
+    settings.slideHeight = $firstSlide.height();
+  
+    console.log(settings.slideWidth);
+    console.log(settings.slideHeight);
+
+    // Calculate slider width and height
+    settings.sliderWidth = Math.ceil((settings.slideWidth * $slides.length));
+    settings.sliderHeight = $firstSlide.outerHeight(true);
+
+    // Set slider width and height
+    $sliderWrapper.width(settings.sliderWidth);
+    //$sliderWrapper.height(settings.sliderHeight);
+
+    // Set scene
+    setScene();
+
+    //resizing = false;
+}
+
+function setScene() {
+
+    var xDist = -$slides.width() * ( $slides.length - 1 ),
+        tlParams = { x: xDist, ease: Power2.easeInOut };
+            
+    if (scrollScene != null && scrollTimeline != null) {
+        
+        progress = 0;
+        scrollScene.progress(progress);
+
+        scrollTimeline = new TimelineMax();
+        scrollTimeline.to( $sliderWrapper, 2, tlParams );
+
+        scrollScene.setTween(scrollTimeline);
+
+        scrollScene.refresh();
+
+    } else {
+        // Init ScrollMagic controller
+        scrollController = new ScrollMagic.Controller();
+
+        //Create Tween
+        scrollTimeline = new TimelineMax();
+        scrollTimeline.to( $sliderWrapper, 2, tlParams );
+        scrollTimeline.progress( progress );
+
+        // Create scene to pin and link animation
+        scrollScene = new ScrollMagic.Scene({
+            triggerElement: settings.slider,
+            triggerHook: "onLeave",
+            duration: settings.sliderWidth
+        })
+        .setPin(settings.slider)
+        .setTween(scrollTimeline)
+        .addTo(scrollController)
+        .on('start', function (event) {
+        scrollTimeline.time(0);
+        });
+    }
+
+    }
+
+    $(document).ready(function() {
+    scrollSlider(); 
+    });
+
+    })(jQuery);
+
+
+    </script>
+</body>
+</html>
